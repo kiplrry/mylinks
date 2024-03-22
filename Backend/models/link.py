@@ -10,7 +10,6 @@ class Link(BaseModel, Base):
     
     __tablename__ = 'links'
 
-    id = Column(String, primary_key=True, default= str(uuid4()))
     name = Column(String(20))
     url = Column(String)
     descr = Column(String)

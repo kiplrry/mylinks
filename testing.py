@@ -1,22 +1,22 @@
 #!/usr/bin/python3
-from testuser import User
-from testdb import Storage
+from test.user import User
+from test import storage
 from sqlalchemy.exc import IntegrityError
 
-storage = Storage()
-storage.start()
-# Barry =  User( id=31, name='barry', age='20')
-# jamie =  User( id=30, name='Jamie', age='19')
-# storage.new(Barry)
-# storage.new(jamie)
+
+us1 = User('barry', 34)
+us2 = User('kk', 22)
+
+storage.new(us1)
+storage.new(us2)
 
 
-ans = storage.get(User, 32)
-print(ans.__dict__)
+# ans = storage.get(User, 32)
+# print(ans.__dict__)
 
-# try:
-#     storage.save()
-# except IntegrityError:
-#     print('duplicate')
+try:
+    storage.save()
+except IntegrityError:
+    print('duplicate')
     
 
