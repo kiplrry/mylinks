@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tester</title>
+</head>
+<body>
+    <div>
+        <h1>login</h1>
+        <div>
+            <ul id="posts">
+            </ul>
+            <button id="pop">pop dat</button>
+        </div>
+        <form method="post" action="http://localhost:5000/api/v1/users">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="email">email:</label><br>
+            <input type="email" id="email" name="email"><br>
+            <!-- <label for="password">password:</label><br>
+            <input type="password" id="password" name="password"><br> -->
+            <label for="age">age:</label><br>
+            <input type="number" id="age" name="age"><br>
+            <label for="username">username:</label><br>
+            <input type="username" id="username" name="username"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+<script src="./main.js"></script>
+<!-- <script>
+        document.body.style.backgroundColor = 'red'
+</script> -->
+</html>

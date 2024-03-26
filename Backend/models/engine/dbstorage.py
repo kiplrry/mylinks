@@ -4,7 +4,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.basemodel import Base
-
+from sqlalchemy.exc import IntegrityError, OperationalError
 class Storage():
     """The Storage Class"""
     
@@ -17,13 +17,23 @@ class Storage():
         PASS = 'pass'
         HOST = 'localhost'
         DB = 'flasktest'
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(USER, PASS, HOST, DB)
-                                      )
+        try:
+            self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+                                        format(USER, PASS, HOST, DB)
+                                        )
+        except OperationalError as err:
+            print(f'err occured {err}')
     
     def save(self, obj):
         """Saves the obj to storage"""
-        self.__session.commit()
+        try:
+            self.__session.commit()
+            return obj.id
+        except IntegrityError as err:
+            print(f'{obj.__class__.__name__} not created, duplicate')
+            return None
+        
+        return None
 
     def new(self, obj):
         """Saves obj to session"""
@@ -31,7 +41,8 @@ class Storage():
     
     def all(self, cls):
         """query on the current database session"""
-        pass
+        vals = self.__session.query(cls).all()
+        return vals
     
     def reload(self):
         """reloads the session"""

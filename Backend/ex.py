@@ -1,7 +1,14 @@
 #!/usr/bin/python3
 
-from models.usermodels import user
+from models import User, Link
 
-# us1 = user.User()
+print('kkkk')
 
-# us1.save()
+users = User.all()
+try:
+    u = User('f', 33, 'juj')
+    u.save()
+except Exception as e:
+    print(e.args[0])
+# print(users)
+

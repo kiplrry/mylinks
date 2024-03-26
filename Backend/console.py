@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import cmd
-# from models.basemodel import BaseModel
 from models import User, Admin
 
 obdict = {
