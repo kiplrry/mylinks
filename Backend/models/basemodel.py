@@ -58,3 +58,10 @@ class BaseModel:
     def count(cls):
         """counts all instances of the class"""
         return models.storage.count(cls)
+    
+    @classmethod
+    @property
+    def query(cls):
+        """counts all instances of the class"""
+        query = models.storage.query(cls)
+        return query

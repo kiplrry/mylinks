@@ -2,14 +2,24 @@
 
 from flask import Flask, make_response, jsonify
 from flask_cors import CORS
-from models import storage
+from models import storage, User
+from flask_login import LoginManager
 from server.api.views import app_views
+
 
 app =Flask(__name__)
 
 app.register_blueprint(app_views)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['SECRET_KEY'] = 'supersecret key'
 cors = CORS(app, origins='*')
+login_manager = LoginManager()
+login_manager.init_app(app=app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    # since the user_id is just the primary key of our user table, use it in the query for the user
+    return User.query.get(user_id)
 
 
 @app.teardown_appcontext

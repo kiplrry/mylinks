@@ -2,7 +2,7 @@
 """Implement the DB storage"""
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import sessionmaker, scoped_session, Query
 from models.basemodel import Base
 from sqlalchemy.exc import IntegrityError, OperationalError
 class Storage():
@@ -74,4 +74,8 @@ class Storage():
         """Count obj in DB"""
         count = self.__session.query(cls).count()
         return count
+    
+    def query(self, cls):
+        """Return query"""
+        return self.__session.query(cls)
 
