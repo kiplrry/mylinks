@@ -23,10 +23,35 @@ class User(BaseModel, UserMixin, Base):
     }
 
     def __init__(self, *args, **kwargs) -> None:
-        self.name = kwargs['name']
-        self.age = kwargs['age']
-        self.username  = kwargs['username']
+        # self.name = kwargs['name']
+        # self.age = kwargs['age']
+        # self.username  = kwargs['username']
+        if kwargs:
+            for arg, val in kwargs.items():
+                setattr(self, arg, val)
+
         super().__init__()
+    
+    def get_links(self):
+        """get a list of user links"""
+        links = self.links
+        link_list = []
+        for link in links:
+            link_list.append(link.to_dict())
+
+        return link_list
+    
+    @classmethod
+    def get(cls, id_or_username):
+            user = super().get(id=id_or_username) or \
+                    super().query.filter_by(username=id_or_username).first()
+
+            print(f'>>> {user}')
+            return user
+
+    @classmethod
+    def get_admins(cls):
+        pass
     
 
         
