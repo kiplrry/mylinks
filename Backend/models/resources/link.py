@@ -5,7 +5,7 @@ from uuid import uuid4
 from sqlalchemy import Column, String, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from models.basemodel import Base, BaseModel
-from _utils import ensure_type, valid_url
+
 class Link(BaseModel, Base):
     """Class Link"""
     
