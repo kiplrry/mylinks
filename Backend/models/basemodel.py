@@ -34,7 +34,7 @@ class BaseModel:
 
     def save(self):        
         """saves the obj instance"""
-        updated_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
         models.storage.new(self)
         id = models.storage.save(self)
         return id
@@ -42,6 +42,17 @@ class BaseModel:
     def delete(self):
         """deletes the obj"""
         models.storage.delete(self)
+    
+    def update(self, **kwargs):
+        """updates obj"""
+        if kwargs:
+            kwargs.pop('id', None)
+            kwargs.pop('updated_at', None)
+            kwargs.pop('created_at', None)
+            
+            for arg, val in kwargs.items():
+                    setattr(self, arg, val)
+        self.save()
 
     @classmethod
     def get(cls, id):
