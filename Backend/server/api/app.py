@@ -53,6 +53,14 @@ def err_405(err):
                                   "err_code": err.code}
                                   ), 405)
 
+@app.errorhandler(401)
+def err_401(err):
+    """unauthorized"""
+    print(err)
+    return make_response(jsonify({'error': "unauthorized",
+                                  "details": err.description,
+                                  "err_code": err.code}
+                                  ), 401)
 
 
 if __name__ == "__main__":

@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Implement the DB storage"""
 
+from dotenv import dotenv_values
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session, Query
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models.basemodel import Base
 from sqlalchemy.exc import IntegrityError, OperationalError
+
+
+config = dotenv_values('.env')
 class Storage():
     """The Storage Class"""
     
@@ -13,10 +17,10 @@ class Storage():
 
     def __init__(self) -> None:
         """initializing the class"""
-        USER = 'larry'
-        PASS = 'pass'
-        HOST = 'localhost'
-        DB = 'flasktest'
+        USER = config['USER']
+        PASS = config['PASS']
+        HOST = config['HOST']
+        DB = config['DB']
         try:
             self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                         format(USER, PASS, HOST, DB)

@@ -21,17 +21,16 @@ def login_post():
                   description: username
                   example: larry
                   type: string
-
-        
-    
     responses:
         '200': 
-            description: authorized
-        headers:
-            Set-Cookie:
-                schema:
-                    type: string
-                    example: session=skajodinaodn
+            description: Authorization cookie
+            example: {"users": []}
+            headers:
+                Set-Cookie:
+                    description: sets the session cookie
+                    schema:
+                        type: string
+                        example: session=skajodinaodn
 
     """
     if not request.get_json():

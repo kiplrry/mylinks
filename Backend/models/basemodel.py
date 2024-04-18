@@ -53,6 +53,7 @@ class BaseModel:
             for arg, val in kwargs.items():
                     setattr(self, arg, val)
         self.save()
+        return self
 
     @classmethod
     def get(cls, id):
