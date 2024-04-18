@@ -6,7 +6,9 @@ from models import storage, User
 from flask_login import LoginManager
 from server.api.views import app_views
 from flasgger import Swagger
+from dotenv import dotenv_values
 
+config = dotenv_values()
 
 app =Flask(__name__)
 
@@ -64,4 +66,4 @@ def err_401(err):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, threaded=True, host='0.0.0.0')
+    app.run(debug=True, threaded=True, host='0.0.0.0', port=config['PORT'])
